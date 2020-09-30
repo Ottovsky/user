@@ -12,8 +12,6 @@ on:
     tags:
       - "*"  # run for tags
 
-
-
 jobs:
   test:
     defaults:

@@ -23,10 +23,6 @@ test:
 	@docker build -t $(INSTANCE)-test -f ./Dockerfile-test .
 	@docker run --rm -it $(INSTANCE)-test /bin/sh -c 'glide novendor| xargs go test -v'
 
-test-github:
-	@docker build -t $(INSTANCE)-test -f ./Dockerfile-test .
-	@docker run --rm -t $(INSTANCE)-test /bin/sh -c 'glide novendor| xargs go test -v'
-
 cover:
 	@glide novendor|xargs go test -v -covermode=count
 
