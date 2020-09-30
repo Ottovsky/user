@@ -21,7 +21,7 @@ jobs:
       REPO: user
       GO_VERSION: 1.7.5
       GOPATH: /home/runner/work/user/go
-      
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,6 +31,9 @@ jobs:
       - uses: actions/setup-go@v1
         with:
           go-version: ${{ env.GO_VERSION }}
+
+      - name: Setup PATH
+        run: echo "::add-path::${GOPATH}/bin"
 
       - name: Unit Test
         run: go get -v github.com/Masterminds/glide && glide novendor | xargs go test -v
