@@ -25,7 +25,7 @@ jobs:
       COMMIT: ${{ github.sha }}
       REPO: user
       GO_VERSION: 1.7.5
-      GOPATH: /home/runner/work/user/go
+      GOPATH: /home/runner/work/user/user/go
 
     steps:
       - uses: actions/checkout@v2
