@@ -12,8 +12,13 @@ on:
     tags:
       - "*"  # run for tags
 
+
+
 jobs:
   test:
+    defaults:
+      run:
+        working-directory: go/src/github.com/microservices-demo/user
     runs-on: ubuntu-latest
     env:
       GROUP: weaveworksdemos
@@ -26,7 +31,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-          path: go/src/github.com/microservices-demo/${{ env.REPO }}
+          path: go/src/github.com/microservices-demo/user
 
       - uses: actions/setup-go@v1
         with:
@@ -36,7 +41,7 @@ jobs:
         run: echo "::add-path::${GOPATH}/bin"
 
       - name: Install dependencies
-        run: make deps && go get -v github.com/mattn/goveralls
+        run: pwd && make deps && go get -v github.com/mattn/goveralls
 
       - name: Unit Tests
         run: glide novendor | xargs go test -v
