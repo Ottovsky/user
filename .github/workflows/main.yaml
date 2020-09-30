@@ -20,7 +20,7 @@ jobs:
       COMMIT: ${{ github.sha }}
       REPO: user
       GO_VERSION: 1.7.5
-      GOPATH: /home/runner/work/user/go
+      GOPATH: /home/runner/work/${{ env.REPO }}/go
 
     steps:
       - uses: actions/checkout@v2
@@ -35,17 +35,17 @@ jobs:
       - name: Setup PATH
         run: echo "::add-path::${GOPATH}/bin"
 
-      - name: Unit Test
-        run: go get -v github.com/Masterminds/glide && glide novendor | xargs go test -v
+      - name: Install dependencies
+        run: make deps && go get -v github.com/mattn/goveralls
+
+      - name: Unit Tests
+        run: glide novendor | xargs go test -v
 
       - name: Create cover profile
         run: make coverprofile
 
       - name: Run Docker Test
         run: make dockertest
-
-      - name: Install dependencies
-        run: make deps && go get -v github.com/mattn/goveralls
 
       - name: Submit Coveralls
         run: goveralls -coverprofile=cover.profile -service=travis-ci
