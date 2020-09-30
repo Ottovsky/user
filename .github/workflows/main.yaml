@@ -38,7 +38,7 @@ jobs:
           go-version: ${{ env.GO_VERSION }}
 
       - name: Setup PATH
-        run: echo "::add-path::${GOPATH}/bin" && ls -la /* && sudo mkdir -p /data/db
+        run: echo "::add-path::${GOPATH}/bin" && sudo mkdir -p /data/db
 
       - name: Install dependencies
         run: make deps && go get -v github.com/mattn/goveralls
